@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import About from "./components/About";
 import NoteState from "./context/notes/NoteState";
+import AddNote from "./components/AddNote";
 
 function App() {
   return (
@@ -11,14 +12,19 @@ function App() {
       <NoteState>
         <Router>
           <NavBar />
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/about">
-              <About />
-            </Route>
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/about">
+                <About />
+              </Route>
+              <Route exact path="/createnote">
+                <AddNote/>
+              </Route>
+            </Switch>
+          </div>
         </Router>
       </NoteState>
     </>
