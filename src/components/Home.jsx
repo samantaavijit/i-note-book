@@ -5,12 +5,10 @@ import Notes from "./Notes";
 
 export default class Home extends Component {
   render() {
-    
     return (
       <>
         <Container className="my-3">
-          
-          <Notes/>
+          <Notes />
         </Container>
       </>
     );

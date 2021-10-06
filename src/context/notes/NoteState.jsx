@@ -32,10 +32,9 @@ export default class NoteState extends Component {
         tag: "personal",
         date: "2021-10-05T12:40:22.223Z",
         __v: 0,
-      }
-      ,
+      },
       {
-        _id: "615c474fbebf7d57f7bd87d3",
+        _id: "615c474fbebf7d57f7ubd87d3",
         user: "615c3046f5444fccb80a7aa9",
         title: "Demo title",
         description: "This is description",
@@ -44,7 +43,7 @@ export default class NoteState extends Component {
         __v: 0,
       },
       {
-        _id: "615c47b67a1d8590a34f9d4a",
+        _id: "615c47b67a1d8590atr34f9d4a",
         user: "615c3046f5444fccb80a7aa9",
         title: "Demo title 3",
         description: "This is description 3",
@@ -54,11 +53,20 @@ export default class NoteState extends Component {
       },
     ],
   };
+  // Add a note
+  addNote = (title, description, tag) => {
+    // TODO API CALL
+  };
+  // Delete note
+  deletNote = () => {};
+  // Edit note
+  editNote = () => {};
   render() {
     const { notes } = this.state;
+    const { addNote, deletNote, editNote } = this;
     return (
       <div>
-        <NoteContext.Provider value={{ notes }}>
+        <NoteContext.Provider value={{ notes, addNote }}>
           {this.props.children}
         </NoteContext.Provider>
       </div>

@@ -9,7 +9,7 @@ export default class Notes extends Component {
         <div className="row">
             <h2 className="text-center">Your Notes</h2>
         {notes.map((note) => {
-            return <NoteItem note={note} />;
+            return <NoteItem note={note} key={note._id} />;
         })}
       </div>
     );
