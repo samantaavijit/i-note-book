@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Container } from "react-bootstrap";
+import { Redirect } from "react-router";
 import NoteContext from "../context/notes/NoteContext";
 
 export default class AddNote extends Component {
@@ -42,6 +43,9 @@ export default class AddNote extends Component {
     }
   };
   render() {
+    if (!localStorage.getItem("token")) {
+      return <Redirect to="/login" />;
+    }
     return (
       <>
         <Container className="my-3 mx-5">

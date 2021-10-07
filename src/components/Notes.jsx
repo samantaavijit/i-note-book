@@ -51,6 +51,7 @@ export default class Notes extends Component {
     return isValid;
   };
   handleUpdateButton = () => {
+    // this.props.showAlert("result.error", "danger");
     if (this.checkValidation()) {
       const id = this.state.id;
       this.context.editNote(id, this.state);

@@ -14,8 +14,7 @@ export default class NoteState extends Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE1YzMwNDZmNTQ0NGZjY2I4MGE3YWE5In0sImlhdCI6MTYzMzQzOTk2MX0.hIFGPJ3G5DyBawsY6v-ba_gejS2Sg1y30d-ri8Jeffw",
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const notes = await response.json();
@@ -28,8 +27,7 @@ export default class NoteState extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE1YzMwNDZmNTQ0NGZjY2I4MGE3YWE5In0sImlhdCI6MTYzMzQzOTk2MX0.hIFGPJ3G5DyBawsY6v-ba_gejS2Sg1y30d-ri8Jeffw",
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify(data),
     });
@@ -40,8 +38,7 @@ export default class NoteState extends Component {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE1YzMwNDZmNTQ0NGZjY2I4MGE3YWE5In0sImlhdCI6MTYzMzQzOTk2MX0.hIFGPJ3G5DyBawsY6v-ba_gejS2Sg1y30d-ri8Jeffw",
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const notes = this.state.notes.filter((note) => {
@@ -56,12 +53,11 @@ export default class NoteState extends Component {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE1YzMwNDZmNTQ0NGZjY2I4MGE3YWE5In0sImlhdCI6MTYzMzQzOTk2MX0.hIFGPJ3G5DyBawsY6v-ba_gejS2Sg1y30d-ri8Jeffw",
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify(data),
     });
-
+    const result = await response.json();
     if (response.ok) {
       data = JSON.parse(JSON.stringify(data));
       let newNotes = JSON.parse(JSON.stringify(this.state.notes));
@@ -76,9 +72,9 @@ export default class NoteState extends Component {
         }
       }
       this.setState({ notes: newNotes });
-      return await response.json();
+      return result;
     } else {
-      console.log(response.statusText);
+      console.log(result);
       return response.statusText;
     }
   };
