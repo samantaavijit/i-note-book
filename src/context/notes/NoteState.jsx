@@ -62,6 +62,19 @@ export default class NoteState extends Component {
     });
     const result = await response.json();
     console.log(result);
+    data = JSON.parse(JSON.stringify(data));
+    let newNotes = JSON.parse(JSON.stringify(this.state.notes));
+    
+    for (let i = 0; i < newNotes.length; i++) {
+      const element = newNotes[i];
+      if (element._id === id) {
+        newNotes[i].title = data.title;
+        newNotes[i].description = data.description;
+        newNotes[i].tag = data.tag;
+        break;
+      }
+    }
+    this.setState({ notes: newNotes });
   };
   render() {
     const { notes } = this.state;

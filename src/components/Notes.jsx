@@ -9,19 +9,20 @@ export default class Notes extends Component {
     title: "",
     description: "",
     tag: "",
+    id: "",
   };
   static contextType = NoteContext;
   async componentDidMount() {
     this.context.getAllNotes();
   }
   // get the update note details
-  updateNote = (note) => {
+  updateNote = (currentNote) => {
     this.setState({ show: true });
     this.setState({
-      title: note.title,
-      description: note.description,
-      tag: note.tag,
-      note,
+      title: currentNote.title,
+      description: currentNote.description,
+      tag: currentNote.tag,
+      id: currentNote._id,
     });
   };
   // handle modle close
@@ -51,8 +52,9 @@ export default class Notes extends Component {
   };
   handleUpdateButton = () => {
     if (this.checkValidation()) {
-      const id = this.state.note._id;
+      const id = this.state.id;
       this.context.editNote(id, this.state);
+      this.handleClose();
     }
   };
   render() {
