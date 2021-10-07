@@ -49,6 +49,7 @@ export default class NoteState extends Component {
     });
     this.setState({ notes });
   };
+
   // EDIT a Note
   editNote = async (id, data) => {
     const response = await fetch(`${this.host}/api/notes/updatenote/${id}`, {
@@ -60,21 +61,26 @@ export default class NoteState extends Component {
       },
       body: JSON.stringify(data),
     });
-    const result = await response.json();
-    console.log(result);
-    data = JSON.parse(JSON.stringify(data));
-    let newNotes = JSON.parse(JSON.stringify(this.state.notes));
-    
-    for (let i = 0; i < newNotes.length; i++) {
-      const element = newNotes[i];
-      if (element._id === id) {
-        newNotes[i].title = data.title;
-        newNotes[i].description = data.description;
-        newNotes[i].tag = data.tag;
-        break;
+
+    if (response.ok) {
+      data = JSON.parse(JSON.stringify(data));
+      let newNotes = JSON.parse(JSON.stringify(this.state.notes));
+
+      for (let i = 0; i < newNotes.length; i++) {
+        const element = newNotes[i];
+        if (element._id === id) {
+          newNotes[i].title = data.title;
+          newNotes[i].description = data.description;
+          newNotes[i].tag = data.tag;
+          break;
+        }
       }
+      this.setState({ notes: newNotes });
+      return await response.json();
+    } else {
+      console.log(response.statusText);
+      return response.statusText;
     }
-    this.setState({ notes: newNotes });
   };
   render() {
     const { notes } = this.state;

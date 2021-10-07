@@ -133,6 +133,7 @@ export default class Notes extends Component {
         </Modal>
         <div className="row">
           <h2 className="text-center">Your Notes</h2>
+          {notes.length === 0 && "No notes to display"}
           {notes.map((note) => {
             return (
               <NoteItem

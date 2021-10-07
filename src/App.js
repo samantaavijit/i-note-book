@@ -6,6 +6,8 @@ import About from "./components/About";
 import NoteState from "./context/notes/NoteState";
 import AddNote from "./components/AddNote";
 import MyAlert from "./components/MyAlert";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 function App() {
   return (
@@ -23,7 +25,13 @@ function App() {
                 <About />
               </Route>
               <Route exact path="/createnote">
-                <AddNote/>
+                <AddNote />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
               </Route>
             </Switch>
           </div>
