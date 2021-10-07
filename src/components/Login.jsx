@@ -21,7 +21,7 @@ export default class Login extends Component {
     }
     if (password.length < 6) {
       isValid = false;
-      passwordErr = "Enter valid password";
+      passwordErr = "Password must be atleast 6 characters";
     }
     this.setState({ emailErr, passwordErr });
     return isValid;
@@ -40,13 +40,14 @@ export default class Login extends Component {
       },
       body: JSON.stringify(this.state),
     });
+    const result = await response.json();
     if (response.ok) {
       // SAVE the token and redirect to login page
-      const result = await response.json();
-        localStorage.setItem("token", result.authToken);
-        this.setState({email:null})
+      localStorage.setItem("token", result.authToken);
+      this.setState({ email: null });
+      this.props.showAlert("Login Success", "success", 500);
     } else {
-      console.log(response);
+      this.props.showAlert(result.error, "danger");
     }
   };
   render() {
@@ -55,7 +56,7 @@ export default class Login extends Component {
     }
     return (
       <>
-        <Container>
+        <Container className="my-3">
           <Form onSubmit={this.loginForn} id="login_form">
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email address</Form.Label>
