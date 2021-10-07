@@ -20,7 +20,6 @@ export default class NoteState extends Component {
     });
     const notes = await response.json();
     this.setState({ notes });
-    console.log(notes);
   };
 
   //  ADD an new Note
@@ -34,8 +33,6 @@ export default class NoteState extends Component {
       },
       body: JSON.stringify(data),
     });
-    const result = await response.json();
-    console.log(result);
   };
   // DELETE a Note
   deleteNote = async (id) => {
@@ -47,8 +44,10 @@ export default class NoteState extends Component {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE1YzMwNDZmNTQ0NGZjY2I4MGE3YWE5In0sImlhdCI6MTYzMzQzOTk2MX0.hIFGPJ3G5DyBawsY6v-ba_gejS2Sg1y30d-ri8Jeffw",
       },
     });
-    const notes = this.state.notes.filter((note) => { return note._id !== id })
-    this.setState({notes})
+    const notes = this.state.notes.filter((note) => {
+      return note._id !== id;
+    });
+    this.setState({ notes });
   };
   // EDIT a Note
   editNote = async (id, data) => {
@@ -62,6 +61,7 @@ export default class NoteState extends Component {
       body: JSON.stringify(data),
     });
     const result = await response.json();
+    console.log(result);
   };
   render() {
     const { notes } = this.state;
