@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Redirect } from "react-router";
 
 export default class NavBar extends Component {
   logout = () => {
     localStorage.removeItem("token");
-
+    window.location.href += "login";
   };
   render() {
     return (
