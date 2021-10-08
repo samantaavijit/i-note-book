@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import validator from "validator";
+import NoteContext from "../context/notes/NoteContext";
 
 export default class Signup extends Component {
+  static contextType = NoteContext;
   state = {
     name: "",
     email: "",
@@ -57,16 +59,17 @@ export default class Signup extends Component {
     });
     const result = await response.json();
     if (response.ok) {
-      document.getElementById("myForm").reset();
-      this.props.showAlert("Account created successfully", "success");
+      this.context.showAlert("Account created successfully", "success");
     } else {
-      this.props.showAlert(result.error, "danger");
+      this.context.showAlert(result.error, "danger");
     }
+    document.getElementById("myForm").reset();
   };
   render() {
     return (
       <>
-        <Container className="my-3">
+        <Container className="mt-3">
+        <h2 className="text-center ">Create an account to use iNoteBook</h2>
           <Form onSubmit={this.signUpForm} id="myForm">
             <Form.Group controlId="name">
               <Form.Label>Name</Form.Label>

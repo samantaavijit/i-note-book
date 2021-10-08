@@ -6,6 +6,20 @@ export default class NoteState extends Component {
   host = "http://localhost:5000";
   state = {
     notes: [],
+    alert: null,
+  };
+
+  // SHOW Alert
+  showAlert = (msg, type, interval = 3000) => {
+    this.setState({
+      alert: {
+        msg: msg,
+        type: type,
+      },
+    });
+    setTimeout(() => {
+      this.setState({ alert: null });
+    }, interval);
   };
 
   //  GET all Notes
@@ -31,20 +45,30 @@ export default class NoteState extends Component {
       },
       body: JSON.stringify(data),
     });
+    if (response.ok) {
+      this.showAlert("Note Added successfully", "success");
+    } else {
+      this.showAlert("Try again !", "danger");
+    }
   };
   // DELETE a Note
   deleteNote = async (id) => {
-    const response = await fetch(`${this.host}/api/notes/deletenote/${id}`, {
+    const response = await fetch(`${this.host}/api/notes/deletenotey/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
       },
     });
-    const notes = this.state.notes.filter((note) => {
-      return note._id !== id;
-    });
-    this.setState({ notes });
+    if (response.ok) {
+      const notes = this.state.notes.filter((note) => {
+        return note._id !== id;
+      });
+      this.setState({ notes });
+      this.showAlert("Note Deleted successfully", "success");
+    } else {
+      this.showAlert("Try again !", "danger");
+    }
   };
 
   // EDIT a Note
@@ -57,7 +81,6 @@ export default class NoteState extends Component {
       },
       body: JSON.stringify(data),
     });
-    const result = await response.json();
     if (response.ok) {
       data = JSON.parse(JSON.stringify(data));
       let newNotes = JSON.parse(JSON.stringify(this.state.notes));
@@ -72,19 +95,26 @@ export default class NoteState extends Component {
         }
       }
       this.setState({ notes: newNotes });
-      return result;
+      this.showAlert("Note Updated successfully", "success");
     } else {
-      console.log(result);
-      return response.statusText;
+      this.showAlert("Try again !", "danger");
     }
   };
   render() {
-    const { notes } = this.state;
-    const { addNote, deleteNote, editNote, getAllNotes } = this;
+    const { notes, alert } = this.state;
+    const { addNote, deleteNote, editNote, getAllNotes, showAlert } = this;
     return (
       <div>
         <NoteContext.Provider
-          value={{ notes, addNote, deleteNote, editNote, getAllNotes }}
+          value={{
+            notes,
+            alert,
+            addNote,
+            deleteNote,
+            editNote,
+            getAllNotes,
+            showAlert,
+          }}
         >
           {this.props.children}
         </NoteContext.Provider>

@@ -5,7 +5,7 @@ import NoteContext from "../context/notes/NoteContext";
 import Notes from "./Notes";
 
 export default class Home extends Component {
-  static contextType=NoteContext
+  static contextType = NoteContext;
   render() {
     if (!localStorage.getItem("token")) {
       return <Redirect to="/login" />;
@@ -13,10 +13,9 @@ export default class Home extends Component {
     return (
       <>
         <Container className="my-3">
-          <Notes showAlert={this.props.showAlert}/>
+          <Notes />
         </Container>
       </>
     );
   }
 }
-

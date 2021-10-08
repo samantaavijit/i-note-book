@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Redirect } from "react-router";
 import validator from "validator";
+import NoteContext from "../context/notes/NoteContext";
 
 export default class Login extends Component {
+  static contextType = NoteContext;
   state = {
     email: "",
     password: "",
@@ -44,10 +46,9 @@ export default class Login extends Component {
     if (response.ok) {
       // SAVE the token and redirect to login page
       localStorage.setItem("token", result.authToken);
-      this.setState({ email: null });
-      this.props.showAlert("Login Success", "success", 500);
+      this.context.showAlert("Login Success", "success");
     } else {
-      this.props.showAlert(result.error, "danger");
+      this.context.showAlert(result.error, "danger");
     }
   };
   render() {
@@ -57,6 +58,7 @@ export default class Login extends Component {
     return (
       <>
         <Container className="my-3">
+          <h2 className="text-center">Login to continue to iNoteBook</h2>
           <Form onSubmit={this.loginForn} id="login_form">
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email address</Form.Label>

@@ -32,13 +32,13 @@ export default class NavBar extends Component {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/about">
-                  About
+                <NavLink className="nav-link" to="/createnote">
+                  Add note
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/createnote">
-                  Add note
+                <NavLink className="nav-link" to="/about">
+                  About
                 </NavLink>
               </li>
             </ul>
@@ -53,13 +53,22 @@ export default class NavBar extends Component {
                 Search
               </button> */}
               {!localStorage.getItem("token") ? (
-                <Link
-                  className="btn btn-primary mx-1"
-                  type="button"
-                  to="/signup"
-                >
-                  Sign Up
-                </Link>
+                <>
+                  <Link
+                    className="btn btn-primary mx-1"
+                    type="button"
+                    to="/login"
+                  >
+                    login
+                  </Link>
+                  <Link
+                    className="btn btn-primary mx-1"
+                    type="button"
+                    to="/signup"
+                  >
+                    Sign Up
+                  </Link>
+                </>
               ) : (
                 <button
                   className="btn btn-success mx-1"
