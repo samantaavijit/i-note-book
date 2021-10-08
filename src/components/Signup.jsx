@@ -59,7 +59,7 @@ export default class Signup extends Component {
     });
     const result = await response.json();
     if (response.ok) {
-      this.context.showAlert("Account created successfully", "success");
+      this.context.showAlert("Account created successfully", "success",500);
     } else {
       this.context.showAlert(result.error, "danger");
     }

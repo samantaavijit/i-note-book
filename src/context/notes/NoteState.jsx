@@ -46,7 +46,7 @@ export default class NoteState extends Component {
       body: JSON.stringify(data),
     });
     if (response.ok) {
-      this.showAlert("Note Added successfully", "success");
+      this.showAlert("Note Added successfully", "success",500);
     } else {
       this.showAlert("Try again !", "danger");
     }
@@ -65,7 +65,7 @@ export default class NoteState extends Component {
         return note._id !== id;
       });
       this.setState({ notes });
-      this.showAlert("Note Deleted successfully", "success");
+      this.showAlert("Note Deleted successfully", "success",500);
     } else {
       this.showAlert("Try again !", "danger");
     }
@@ -95,7 +95,7 @@ export default class NoteState extends Component {
         }
       }
       this.setState({ notes: newNotes });
-      this.showAlert("Note Updated successfully", "success");
+      this.showAlert("Note Updated successfully", "success",500);
     } else {
       this.showAlert("Try again !", "danger");
     }

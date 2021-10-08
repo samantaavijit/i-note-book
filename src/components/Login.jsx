@@ -46,7 +46,7 @@ export default class Login extends Component {
     if (response.ok) {
       // SAVE the token and redirect to login page
       localStorage.setItem("token", result.authToken);
-      this.context.showAlert("Login Success", "success");
+      this.context.showAlert("Login Success", "success",500);
     } else {
       this.context.showAlert(result.error, "danger");
     }
